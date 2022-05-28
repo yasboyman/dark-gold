@@ -1,7 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+import {useEffect, useState} from "react";
 
-function App() {
+const App = () => {
+  
+  const [data, setData] = useState([])
+  
+  console.log('This is the data',data)
+  
+  
+  useEffect( () => {
+    
+    const fetchData = async () => {
+      const url = "http://localhost:8000/gold";
+      try {
+        const response =  await axios.get(url)
+       setData(response.data)
+      } catch {
+        console.log('Error')
+      }
+    }
+    fetchData()
+  },[])
+  
   return (
     <div className="App">
       <header className="App-header">
